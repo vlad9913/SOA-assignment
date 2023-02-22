@@ -1,0 +1,21 @@
+version: "3"
+services:
+  login:
+    build:
+      context: ./login
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3000"
+    depends_on:
+      - rabbitmq
+  greeting:
+    build:
+      context: ./greeting
+      dockerfile: Dockerfile
+    depends_on:
+      - rabbitmq
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "15672:15672"
+      - "5672:5672"
